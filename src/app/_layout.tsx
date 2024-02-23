@@ -10,6 +10,13 @@ import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import {
+  Inter_300Light,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  Inter_900Black,
+} from "@expo-google-fonts/inter";
 import { config } from "@gluestack-ui/config"; // Optional if you want to use default theme
 import { GluestackUIProvider } from "@gluestack-ui/themed";
 
@@ -19,7 +26,7 @@ export {
 } from "expo-router";
 
 export const unstable_settings = {
-  initialRouteName: "home",
+  initialRouteName: "index",
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -27,6 +34,11 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("assets/fonts/Oswald-VariableFont_wght.ttf"),
+    Inter_300Light,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_900Black,
     ...FontAwesome.font,
   });
 
@@ -54,10 +66,12 @@ function RootLayoutNav() {
     <GluestackUIProvider config={config}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
+          <Stack.Screen name="home" options={{ headerShown: false }} />
           <Stack.Screen
-            name="home"
+            name="index"
             options={{ headerShown: false, presentation: "modal" }}
           />
+
           <Stack.Screen
             name="inputScreen"
             options={{

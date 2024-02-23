@@ -40,7 +40,7 @@ const InputScreen = () => {
             autoCapitalize="none"
             secureTextEntry={!senhaVisivel}
             value={senha}
-            onChange={(text) => setSenha(text)}
+            onChangeText={(text) => setSenha(text)}
             style={styles.input}
           />
           <TouchableOpacity onPress={toggleSenhaVisivel} style={styles.eyeIcon}>
