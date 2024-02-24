@@ -1,6 +1,6 @@
 import { Pressable, Text } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
 
+import { Image } from "expo-image";
 import { router } from "expo-router";
 
 import { styles } from "./styles";
@@ -32,7 +32,7 @@ export const GridMenu = ({ items }: GridMenuProps) => {
                 </Text>
               </View>
             )}
-            <Icon name={item.icon} size={40} color="white" />
+            <Image source={item.icon} style={{ width: 43, height: 43 }} />
           </Pressable>
           <Text style={styles.buttonText}>{item?.title}</Text>
         </View>

@@ -6,10 +6,12 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 
+import Header from "components/Header";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { femaleUser } from "../helper/user";
+
 import {
   Inter_300Light,
   Inter_500Medium,
@@ -39,7 +41,6 @@ export default function RootLayout() {
     Inter_600SemiBold,
     Inter_700Bold,
     Inter_900Black,
-    ...FontAwesome.font,
   });
 
   useEffect(() => {
@@ -65,8 +66,23 @@ function RootLayoutNav() {
   return (
     <GluestackUIProvider config={config}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="home" options={{ headerShown: false }} />
+        <Stack
+          screenOptions={{
+            headerShown: true,
+            headerTitle: "Home",
+            headerTransparent: true,
+            headerStyle: {
+              backgroundColor: "transparent",
+            },
+            header: () => <Header notifications={1} user={femaleUser} />,
+          }}
+        >
+          <Stack.Screen
+            name="home"
+            options={{
+              headerShown: true,
+            }}
+          />
           <Stack.Screen
             name="index"
             options={{ headerShown: false, presentation: "modal" }}

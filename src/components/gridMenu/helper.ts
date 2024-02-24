@@ -1,17 +1,17 @@
 export const menuItems = [
   {
-    title: "solicitações",
-    icon: "envelope",
+    title: "Solicitações",
+    icon: require("assets/images/home/Invite.png"),
     route: "home",
   },
   {
     title: "Comunicados",
-    icon: "bullhorn",
+    icon: require("assets/images/home/Commercial.png"),
     route: "home",
   },
   {
     title: "Processos",
-    icon: "spinner",
+    icon: require("assets/images/home/Loading.png"),
     route: "home",
   },
 ];

@@ -1,15 +1,19 @@
 import { StyleSheet } from "react-native";
 
+const envoirment = process.env.EXPO_PUBLIC_ENVOIRMENT;
+
+const theme = envoirment === "dev" ? "main" : process.env.EXPO_PUBLIC_THEME;
+
 export const themeShadow = StyleSheet.create({
   shadow: {
-    shadowColor: "#F229BD",
+    shadowColor: theme === "main" ? "#F229BD" : "#8097A6",
     shadowOffset: {
       width: -10,
       height: 16,
     },
     shadowOpacity: 1.25,
     shadowRadius: 18.46,
-    elevation: 14,
+    elevation: 10,
   },
 });
 
@@ -43,11 +47,11 @@ export const mainTheme = {
 };
 export const blueTheme = {
   tokens: {
-    primary0: "#E5F1FB",
-    primary50: "#CCE9FF",
-    primary100: "#ADDBFF",
-    primary200: "#7CC2FF",
-    primary300: "#4AA9FF",
+    primary0: "#8097A6",
+    primary50: "#A3C4D9",
+    primary100: "#A4C4DB",
+    primary200: "#C0D6E6",
+    primary300: "#DEDEDE",
     // primary400: "#1A91FF",
     // primary500: "#0077E6",
     // primary600: "#005DB4",
@@ -78,5 +82,5 @@ export const handleTheme = (theme: themeType) => {
   return theme === "main" ? mainTheme : blueTheme;
 };
 export const getTheme = () => {
-  return handleTheme("main");
+  return handleTheme(theme as themeType);
 };
