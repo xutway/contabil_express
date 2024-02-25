@@ -6,10 +6,19 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 
+import Header from "components/Header";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { femaleUser } from "../helper/user";
+
+import {
+  Inter_300Light,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  Inter_900Black,
+} from "@expo-google-fonts/inter";
 import { config } from "@gluestack-ui/config"; // Optional if you want to use default theme
 import { GluestackUIProvider } from "@gluestack-ui/themed";
 
@@ -19,7 +28,7 @@ export {
 } from "expo-router";
 
 export const unstable_settings = {
-  initialRouteName: "home",
+  initialRouteName: "index",
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -27,7 +36,11 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("assets/fonts/Oswald-VariableFont_wght.ttf"),
-    ...FontAwesome.font,
+    Inter_300Light,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_900Black,
   });
 
   useEffect(() => {
@@ -53,11 +66,28 @@ function RootLayoutNav() {
   return (
     <GluestackUIProvider config={config}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
+        <Stack
+          screenOptions={{
+            headerShown: true,
+            headerTitle: "Home",
+            headerTransparent: true,
+            headerStyle: {
+              backgroundColor: "transparent",
+            },
+            header: () => <Header notifications={1} user={femaleUser} />,
+          }}
+        >
           <Stack.Screen
             name="home"
+            options={{
+              headerShown: true,
+            }}
+          />
+          <Stack.Screen
+            name="index"
             options={{ headerShown: false, presentation: "modal" }}
           />
+
           <Stack.Screen
             name="inputScreen"
             options={{

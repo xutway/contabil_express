@@ -1,94 +1,73 @@
-import React from "react";
 import {
-  Dimensions,
-  ImageBackground,
-  SafeAreaView,
+  ScrollView,
   StyleSheet,
-  Text,
-  TouchableOpacity,
+  useWindowDimensions,
   View,
 } from "react-native";
 
-import { Oswald_400Regular, useFonts } from "@expo-google-fonts/oswald";
+import ChartCard from "components/ChartCard";
+import { GridMenu } from "components/gridMenu";
+import { menuItems } from "components/gridMenu/helper";
+import MenuButtom from "components/MenuButtom";
+import { Image } from "expo-image";
 
-const { height } = Dimensions.get("window");
-
-const LoginScreen = () => {
-  const [fontLoaded] = useFonts({
-    Oswald_400Regular,
-  });
-
-  if (!fontLoaded) {
-    return null;
-  }
-
+const HomeScreen = () => {
+  const { width } = useWindowDimensions();
   return (
-    <SafeAreaView style={styles.safeAreaView}>
-      <View style={styles.container}>
-        <ImageBackground
-          style={styles.imageBackground}
-          resizeMode="contain"
-          source={require("assets/images/contadora.png")}
+    <ScrollView>
+      <Image
+        style={{
+          top: -10,
+          zIndex: -9999,
+          position: "absolute",
+          width,
+          height: 300,
+        }}
+        source={require("assets/images/home/bgBuble.png")}
+      />
+      <View style={styles.divider} />
+      <View style={styles.menuContainer}>
+        <GridMenu items={menuItems} />
+        <View style={styles.chartContainer}>
+          <ChartCard title="Log de Solicitações" series={[1, 1]} />
+          <ChartCard title="Log de Processos" series={[1, 1]} />
+        </View>
+        <MenuButtom
+          source={require("assets/images/home/eventIcon.png")}
+          title="Calendário"
+          description="Confira aqui suas dependências do mês"
         />
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>
-            Seu universo contábil ao alcance dos seus dedos
-          </Text>
-          <Text style={styles.subtitle}>Explore, controle, transforme!</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.loginButton}>
-            <Text style={styles.loginButtonText}>Login</Text>
-          </TouchableOpacity>
-        </View>
+        <MenuButtom
+          source={require("assets/images/home/cloudIcon.png")}
+          title="GED"
+          description="Seu Gerenciador Eletrônico de Documentos"
+        />
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
+export default HomeScreen;
+
 const styles = StyleSheet.create({
-  safeAreaView: {},
-  container: {},
-  imageBackground: {
-    height: height / 2.5,
-    marginTop: 70,
+  divider: {
+    marginVertical: 70,
+    height: 1,
+    width: "80%",
   },
-  textContainer: {
-    paddingHorizontal: 20,
-    paddingTop: 40,
+  menuContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingHorizontal: 12,
+    gap: 10,
+    paddingBottom: 20,
   },
-  title: {
-    fontSize: 35,
-    color: "primary300",
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 14,
-    color: "black",
-    fontFamily: "Oswald_400Regular",
-    textAlign: "center",
-    marginTop: 20,
-  },
-  buttonContainer: {
-    paddingHorizontal: 10,
-    paddingTop: 40,
-    alignItems: "center",
-  },
-  loginButton: {
-    backgroundColor: "#d48594",
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    width: "60%",
-    borderRadius: 15,
-  },
-  loginButtonText: {
-    color: "white",
-    fontSize: 20,
-    textAlign: "center",
-    fontFamily: "Oswald_400Regular",
-    fontWeight: "bold",
+  chartContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 10,
   },
 });
-
-export default LoginScreen;
